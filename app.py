@@ -32,6 +32,17 @@ if option == "Content-Based Filtering":
     st.subheader("🎬 Content-Based Recommendation")
     st.write("Find movies similar to one you like based on genres.")
     
+    # Similarity metric selection
+    similarity_metric = st.selectbox(
+        "Similarity Metric:",
+        ["cosine", "euclidean", "pearson"],
+        format_func=lambda x: {
+            "cosine": "Cosine Similarity (Default)",
+            "euclidean": "Euclidean Distance",
+            "pearson": "Pearson Correlation"
+        }[x]
+    )
+    
     movie_title = st.text_input("Enter a movie title you enjoyed:", 
                                value="The Dark Knight (2008)")
     
@@ -39,18 +50,31 @@ if option == "Content-Based Filtering":
     
     if st.button("Get Similar Movies", type="primary"):
         with st.spinner("Finding similar movies..."):
-            recommendations = content_based_recommend(movie_title, num_recs)
+            recommendations = content_based_recommend(movie_title, num_recs, similarity_metric)
             
             if "Error" in recommendations.columns:
                 st.error(recommendations.iloc[0, 0])
             else:
-                st.success(f"Movies similar to **{movie_title}**")
+                st.success(f"Movies similar to **{movie_title}** using {similarity_metric}")
                 st.dataframe(recommendations, use_container_width=True, hide_index=True)
+                
+                st.caption(f"Using {similarity_metric} similarity metric")
 
 # ====================== COLLABORATIVE ======================
 elif option == "Collaborative Filtering":
     st.subheader("👥 Collaborative Filtering")
     st.write("Recommendations based on what similar users liked.")
+    
+    # Algorithm selection
+    algorithm = st.selectbox(
+        "Algorithm:",
+        ["svd", "nmf", "knn"],
+        format_func=lambda x: {
+            "svd": "SVD (Singular Value Decomposition) - Default",
+            "nmf": "NMF (Non-negative Matrix Factorization)",
+            "knn": "KNN (K-Nearest Neighbors)"
+        }[x]
+    )
     
     user_id = st.number_input("Enter User ID", min_value=1, max_value=int(MAX_USER_ID), value=1)
 
@@ -58,18 +82,41 @@ elif option == "Collaborative Filtering":
     
     if st.button("Get Recommendations for User", type="primary"):
         with st.spinner("Generating recommendations..."):
-            recommendations = collaborative_recommend(user_id, num_recs)
+            recommendations = collaborative_recommend(user_id, num_recs, algorithm)
             
             if "Error" in recommendations.columns:
                 st.error(recommendations.iloc[0, 0])
             else:
-                st.success(f"Top recommendations for User **{user_id}**")
+                st.success(f"Top recommendations for User **{user_id}** using {algorithm.upper()}")
                 st.dataframe(recommendations, use_container_width=True, hide_index=True)
+                
+                st.caption(f"Algorithm: {algorithm.upper()}")
 
 # ====================== HYBRID (Best) ======================
 else:
     st.subheader("🔥 Hybrid Model (Recommended)")
     st.write("Combines Collaborative + Content-based for better personalization.")
+    
+    # Collaboration algorithm selection
+    collab_algorithm = st.selectbox(
+        "Collaborative Algorithm:",
+        ["svd", "nmf", "knn"],
+        format_func=lambda x: {
+            "svd": "SVD (Default)",
+            "nmf": "NMF",
+            "knn": "KNN"
+        }[x]
+    )
+    
+    # Content similarity metric selection
+    content_metric = st.selectbox(
+        "Content Similarity Metric:",
+        ["cosine", "euclidean"],
+        format_func=lambda x: {
+            "cosine": "Cosine (Default)",
+            "euclidean": "Euclidean"
+        }[x]
+    )
     
     user_id = st.number_input("Enter User ID", min_value=1, max_value=int(MAX_USER_ID), value=1, key="hybrid_user")
 
@@ -78,7 +125,7 @@ else:
     
     if st.button("Get Personalized Recommendations", type="primary"):
         with st.spinner("Calculating hybrid recommendations..."):
-            recommendations = hybrid_recommend(user_id, num_recs, alpha)
+            recommendations = hybrid_recommend(user_id, num_recs, alpha, content_metric)
             
             if "Error" in recommendations.columns:
                 st.error(recommendations.iloc[0, 0])
@@ -86,13 +133,14 @@ else:
                 st.success(f"Hybrid Recommendations for User **{user_id}**")
                 st.dataframe(recommendations, use_container_width=True, hide_index=True)
                 
-                st.caption("Higher `hybrid_score` = Better recommendation")
+                st.caption(f"Algorithm: {collab_algorithm.upper()} + {content_metric} | α = {alpha}")
 
 # Footer
 st.sidebar.markdown("---")
 st.sidebar.info(
     "Dataset: MovieLens ml-latest-small\n"
-    "Techniques: Cosine Similarity + SVD Matrix Factorization"
+    "Algorithms: SVD, NMF, KNN\n"
+    "Metrics: Cosine, Euclidean, Pearson"
 )
 
 st.caption("Built in VS Code with Python • Content-based + Collaborative + Hybrid")
