@@ -33,7 +33,7 @@ if option == "Content-Based Filtering":
     st.write("Find movies similar to one you like based on genres.")
     
     movie_title = st.text_input("Enter a movie title you enjoyed:", 
-                               value="The Dark Knight (2008)")
+                               value="Dark Knight The (2008)")
     
     num_recs = st.slider("Number of recommendations", 5, 15, 10)
     
