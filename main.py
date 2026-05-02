@@ -125,9 +125,9 @@ predicted_df_nmf = pd.DataFrame(predicted_ratings_nmf, columns=user_item_matrix.
 # ====================== KNN-Based Collaborative Filtering ======================
 print("Training KNN Collaborative Model...")
 
-# User-based KNN
+# User-based KNN: fit on users (rows)
 user_knn = NearestNeighbors(metric='cosine', n_neighbors=20)
-user_knn.fit(matrix_normalized.T)  # Item-based: use item vectors (users as features)
+user_knn.fit(matrix_normalized)  # Users as rows
 
 
 def collaborative_recommend(user_id, top_n=10, method='svd'):
@@ -140,24 +140,38 @@ def collaborative_recommend(user_id, top_n=10, method='svd'):
             return pd.DataFrame({"Error": [f"User {user_id} not found!"]})
         user_predictions = predicted_df_nmf.loc[user_id]
     elif method == 'knn':
-        # KNN-based recommendations
+        # KNN-based recommendations (user-based collaborative filtering)
         if user_id not in user_item_matrix.index:
             return pd.DataFrame({"Error": [f"User {user_id} not found!"]})
         
-        user_ratings = matrix_normalized[user_id - 1, :].reshape(1, -1)
+        # Get the target user's rating vector
+        user_idx = user_id - 1  # Convert to 0-based index
+        user_ratings = matrix_normalized[user_idx, :].reshape(1, -1)
+        
+        # Find k similar users based on their rating patterns
         distances, indices = user_knn.kneighbors(user_ratings)
         
-        # Find similar users and get their recommendations
-        similar_users = indices[0]
-        similar_scores = 1 / (distances[0] + 1e-10)
+        # Get similar users (exclude the user itself)
+        similar_users = [u for u in indices[0] if u != user_idx]
         
-        # Aggregate ratings from similar users
-        weighted_ratings = np.zeros(matrix.shape[1])
-        for i, sim_user in enumerate(similar_users):
-            weighted_ratings += matrix_normalized[sim_user, :] * similar_scores[i]
-        weighted_ratings = weighted_ratings / (similar_scores.sum() + 1e-10)
-        
-        user_predictions = pd.Series(weighted_ratings + user_means[user_id - 1], index=user_item_matrix.columns)
+        if len(similar_users) == 0:
+            # Fallback to SVD if no similar users found
+            user_predictions = predicted_df.loc[user_id]
+        else:
+            # Calculate similarity scores (1 / (1 + distance))
+            similar_scores = np.array([1 / (distances[0][i] + 1e-10) for i in range(len(similar_users))])
+            
+            # Aggregate ratings from similar users (weighted by similarity)
+            weighted_ratings = np.zeros(matrix.shape[1])
+            for i, sim_user in enumerate(similar_users):
+                weighted_ratings += matrix_normalized[sim_user, :] * similar_scores[i]
+            weighted_ratings = weighted_ratings / (similar_scores.sum() + 1e-10)
+            
+            # Add user mean back
+            user_predictions = pd.Series(
+                weighted_ratings + user_means[user_idx], 
+                index=user_item_matrix.columns
+            )
     else:
         user_predictions = predicted_df.loc[user_id]
     
