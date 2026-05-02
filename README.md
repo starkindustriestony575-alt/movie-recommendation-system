@@ -82,38 +82,6 @@ The app will open in your browser at http://localhost:8501
 - Default α = 0.65 (65% collaborative, 35% content-based)
 - Provides personalized recommendations
 
-## 🚀 Deploy to Streamlit Cloud (Easiest)
-
-1. **Push to GitHub** (see below)
-2. Go to https://share.streamlit.io
-3. Sign in with GitHub
-4. Click "New app" → Select your repo → Select branch → Main file path: `app.py`
-5. Click "Deploy!"
-
-Your app will be live at `https://yourusername-movie-recommendation-system.streamlit.app`
-
-## 📤 Push to GitHub (Manual Steps)
-
-Since GitHub CLI isn't installed, follow these steps:
-
-1. **Create a new repository on GitHub**:
-   - Go to https://github.com/new
-   - Repository name: `movie-recommendation-system`
-   - Make it **Public**
-   - Don't add README (we already have one)
-   - Click "Create repository"
-
-2. **Push your code** (copy-paste these commands in terminal):
-   ```
-   echo "# Movie Recommendation System" >> README.md
-   git remote add origin https://github.com/YOURUSERNAME/movie-recommendation-system.git
-   git branch -M main
-   git push -u origin main
-   ```
-   (Replace `YOURUSERNAME` with your GitHub username)
-
-3. Your code is now on GitHub! 🎉
-
 ## 🎯 Usage
 
 1. **Select Recommendation Type** from sidebar
@@ -125,6 +93,7 @@ Since GitHub CLI isn't installed, follow these steps:
 
 MIT License
 
-## 👤 Author
+## 👤 Sarvagya Gupta
 
-Your Name - [GitHub](https://github.com/yourusername)
+Your Name - [Little Stark](https://github.com/starkindustriestony575-alt)
+
