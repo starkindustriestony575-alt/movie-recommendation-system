@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # 🎬 Movie Recommendation System
 
 A web-based movie recommendation application that uses three different approaches:
@@ -97,3 +98,6 @@ MIT License
 ## 👤 Author
 
 Your Name - [GitHub](https://github.com/yourusername)
+=======
+# movie-recommendation-system
+>>>>>>> a823c3c1cd37d1c30f34ad5fc673360907d4cbbd
