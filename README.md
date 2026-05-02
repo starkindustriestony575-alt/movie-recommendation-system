@@ -70,6 +70,7 @@ Movie recommendation-system/
 ├── 📂 main.py                 # Core recommendation algorithms (business logic)
 ├── 📂 requirements.txt        # Python dependencies
 ├── 📂 README.md               # This file
+├── 📂 LICENSE                 # MIT License
 ├── 📂 Data/
 │   ├── 📄 movies.csv          # Movie metadata (ID, title, genres)
 │   └── 📄 ratings.csv         # User ratings (userId, movieId, rating, timestamp)

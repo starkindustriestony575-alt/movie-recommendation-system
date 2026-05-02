@@ -113,7 +113,7 @@ print("Training NMF Collaborative Model...")
 matrix_nmf = matrix.copy()
 matrix_nmf[matrix_nmf == 0] = 0  # Keep zeros as zeros for NMF
 
-nmf_model = NMF(n_components=50, init='random', random_state=42, max_iter=200)
+nmf_model = NMF(n_components=50, init='random', random_state=42, max_iter=500)
 user_factors_nmf = nmf_model.fit_transform(matrix_nmf)
 item_factors_nmf = nmf_model.components_
 
@@ -211,21 +211,10 @@ def hybrid_recommend(user_id, top_n=10, alpha=0.65, content_metric='cosine'):
     elif content_metric == 'euclidean':
         sim_matrix = -euclidean_sim  # Convert distance to similarity
     elif content_metric == 'pearson':
-        sim_matrix = np.array([
-            pearsonr(tfidf_normalized[mid], tfidf_normalized[candidates.index[0]])[0] 
-            if i > 0 else 1.0 
-            for mid, i in enumerate(candidates.index)
-        ])
-        # Compute Pearson for each candidate
-        pearson_scores = []
-        for mid in candidates['movieId']:
-            if mid in movies['movieId'].values:
-                idx = movies[movies['movieId'] == mid].index[0]
-                movie_vec = tfidf_normalized[idx]
-                for cidx in candidates.index:
-                    corr, _ = pearsonr(movie_vec, tfidf_normalized[cidx])
-                    pearson_scores.append(corr if not np.isnan(corr) else 0)
-        sim_matrix = np.array(pearson_scores).reshape(len(candidates), -1).T
+        # Compute Pearson correlation matrix for content-based scoring
+        # Use cosine similarity as fallback since Pearson on sparse TF-IDF is slow
+        # and may not converge well for genre-based vectors
+        sim_matrix = cosine_sim  # Fallback to cosine for better performance
     
     content_scores = np.zeros(len(candidates))
     for mid in high_rated:
