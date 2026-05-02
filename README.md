@@ -9,7 +9,7 @@ A web-based movie recommendation application that uses three different approache
 
 **GitHub Repository**: https://github.com/starkindustriestony575-alt/movie-recommendation-system
 
-**Streamlit Community Cloud**: (Deploy using instructions below)
+**Streamlit Community Cloud**: https://movie-recommendation-system-vsdarx6jwnpi8ft5wyqjzv.streamlit.app/
 
 ## 🛠️ Tech Stack
 
@@ -35,34 +35,6 @@ Movie recommendation-system/
     ├── cosine_sim.npy       # Pre-computed cosine similarity matrix
     └── movies.pkl          # Cached movie dataframe
 ```
-
-## 📦 Installation
-
-```bash
-# Clone the repository
-git clone https://github.com/yourusername/movie-recommendation-system.git
-cd movie-recommendation-system
-
-# Create virtual environment
-python -m venv venv
-
-# Activate virtual environment
-# Windows:
-venv\Scripts\activate
-# Linux/Mac:
-source venv/bin/activate
-
-# Install dependencies
-pip install -r requirements.txt
-```
-
-## 🏃‍♂️ How to Run
-
-```bash
-streamlit run app.py
-```
-
-The app will open in your browser at http://localhost:8501
 
 ## 📊 How It Works
 
