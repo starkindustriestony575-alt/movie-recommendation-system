@@ -106,7 +106,7 @@ else:
             "nmf": "NMF",
             "knn": "KNN"
         }[x]
-    )
+)
     
     # Content similarity metric selection
     content_metric = st.selectbox(
@@ -125,7 +125,7 @@ else:
     
     if st.button("Get Personalized Recommendations", type="primary"):
         with st.spinner("Calculating hybrid recommendations..."):
-            recommendations = hybrid_recommend(user_id, num_recs, alpha, content_metric)
+            recommendations = hybrid_recommend(user_id, num_recs, alpha, content_metric, collab_algorithm)
             
             if "Error" in recommendations.columns:
                 st.error(recommendations.iloc[0, 0])

@@ -185,18 +185,52 @@ def collaborative_recommend(user_id, top_n=10, method='svd'):
 
 
 # ====================== HYBRID RECOMMENDATION ======================
-def hybrid_recommend(user_id, top_n=10, alpha=0.65, content_metric='cosine'):
-    if user_id not in predicted_df.index:
+def hybrid_recommend(user_id, top_n=10, alpha=0.65, content_metric='cosine', algorithm='svd'):
+    # Select the appropriate predicted DataFrame based on algorithm
+    if algorithm == 'svd':
+        predictions = predicted_df
+    elif algorithm == 'nmf':
+        predictions = predicted_df_nmf
+    elif algorithm == 'knn':
+        # For KNN, we need to compute predictions dynamically
+        if user_id not in user_item_matrix.index:
+            return pd.DataFrame({"Error": [f"User {user_id} not found!"]})
+        
+        user_idx = user_id - 1
+        user_ratings = matrix_normalized[user_idx, :].reshape(1, -1)
+        distances, indices = user_knn.kneighbors(user_ratings)
+        
+        similar_users = [u for u in indices[0] if u != user_idx]
+        
+        if len(similar_users) == 0:
+            # Fallback to SVD if no similar users found
+            predictions = predicted_df
+        else:
+            similar_scores = np.array([1 / (distances[0][i] + 1e-10) for i in range(len(similar_users))])
+            weighted_ratings = np.zeros(matrix.shape[1])
+            for i, sim_user in enumerate(similar_users):
+                weighted_ratings += matrix_normalized[sim_user, :] * similar_scores[i]
+            weighted_ratings = weighted_ratings / (similar_scores.sum() + 1e-10)
+            knn_predictions = pd.Series(
+                weighted_ratings + user_means[user_idx],
+                index=user_item_matrix.columns
+            )
+            predictions = pd.DataFrame(knn_predictions).T
+            predictions.index = [user_id]
+    else:
+        predictions = predicted_df
+    
+    if user_id not in predictions.index:
         return pd.DataFrame({"Error": [f"User {user_id} not found!"]})
     
     user_rated = ratings[ratings['userId'] == user_id]['movieId'].unique()
     candidates = movies[~movies['movieId'].isin(user_rated)].copy()
     
-    # Collaborative scores (SVD)
+    # Collaborative scores (from selected algorithm)
     collab_scores = []
     for mid in candidates['movieId']:
-        if mid in predicted_df.columns:
-            score = predicted_df.loc[user_id, mid]
+        if mid in predictions.columns:
+            score = predictions.loc[user_id, mid]
         else:
             score = 3.0
         collab_scores.append(score)
@@ -256,5 +290,11 @@ if __name__ == "__main__":
     print("\n6. Collaborative Recommendation (KNN) for User 1:")
     print(collaborative_recommend(user_id=1, top_n=5, method='knn'))
     
-    print("\n7. Hybrid Recommendation for User 1:")
-    print(hybrid_recommend(user_id=1, top_n=8, alpha=0.65))
+    print("\n7. Hybrid Recommendation for User 1 (SVD):")
+    print(hybrid_recommend(user_id=1, top_n=8, alpha=0.65, algorithm='svd'))
+    
+    print("\n8. Hybrid Recommendation for User 1 (NMF):")
+    print(hybrid_recommend(user_id=1, top_n=8, alpha=0.65, algorithm='nmf'))
+    
+    print("\n9. Hybrid Recommendation for User 1 (KNN):")
+    print(hybrid_recommend(user_id=1, top_n=8, alpha=0.65, algorithm='knn'))
