@@ -35,7 +35,7 @@ if option == "Content-Based Filtering":
     movie_title = st.text_input("Enter a movie title you enjoyed:", 
                                value="The Dark Knight (2008)")
     
-    num_recs = st.slider("Number of recommendations", 3, 5, 15, 10)
+    num_recs = st.slider("Number of recommendations", 5, 15, 10)
     
     if st.button("Get Similar Movies", type="primary"):
         with st.spinner("Finding similar movies..."):
