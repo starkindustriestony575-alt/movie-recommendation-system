@@ -1,20 +1,16 @@
 # 🎬 Movie Recommendation System
 
-<p align="center">
-  <a href="https://python.org/"><img src="https://img.shields.io/badge/Python-3.14+-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python"></a>
-  <a href="https://streamlit.io/"><img src="https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white" alt="Streamlit"></a>
-  <a href="https://scikit-learn.org/"><img src="https://img.shields.io/badge/Scikit--learn-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white" alt="Scikit-learn"></a>
-  <a href="https://pandas.pydata.org/"><img src="https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=pandas&logoColor=white" alt="Pandas"></a>
-  <a href="https://numpy.org/"><img src="https://img.shields.io/badge/NumPy-013243?style=for-the-badge&logo=numpy&logoColor=white" alt="NumPy"></a>
-  <a href="https://scipy.org/"><img src="https://img.shields.io/badge/SciPy-8C0495?style=for-the-badge&logo=scipy&logoColor=white" alt="SciPy"></a>
-</p>
+[![Python](https://img.shields.io/badge/Python-3.14+-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://python.org/)
+[![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)](https://streamlit.io/)
+[![Scikit-learn](https://img.shields.io/badge/Scikit--learn-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white)](https://scikit-learn.org/)
+[![Pandas](https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=pandas&logoColor=white)](https://pandas.pydata.org/)
+[![NumPy](https://img.shields.io/badge/NumPy-013243?style=for-the-badge&logo=numpy&logoColor=white)](https://numpy.org/)
+[![SciPy](https://img.shields.io/badge/SciPy-8C0495?style=for-the-badge&logo=scipy&logoColor=white)](https://scipy.org/)
 
-<p align="center">
-  <a href="https://github.com/starkindustriestony575-alt/movie-recommendation-system/stargazers"><img src="https://img.shields.io/github/stars/starkindustriestony575-alt/movie-recommendation-system?style=flat&color=yellow" alt="Stars"></a>
-  <a href="https://github.com/starkindustriestony575-alt/movie-recommendation-system/fork"><img src="https://img.shields.io/github/forks/starkindustriestony575-alt/movie-recommendation-system?style=flat&color=green" alt="Forks"></a>
-  <a href="https://github.com/starkindustriestony575-alt/movie-recommendation-system/blob/main/LICENSE"><img src="https://img.shields.io/github/license/starkindustriestony575-alt/movie-recommendation-system?style=flat&color=blue" alt="License"></a>
-  <a href="https://github.com/starkindustriestony575-alt/movie-recommendation-system/commits/main"><img src="https://img.shields.io/github/last-commit/starkindustriestony575-alt/movie-recommendation-system?style=flat&color=orange" alt="Last Commit"></a>
-</p>
+[![Stars](https://img.shields.io/github/stars/starkindustriestony575-alt/movie-recommendation-system?style=flat&color=yellow)](https://github.com/starkindustriestony575-alt/movie-recommendation-system/stargazers)
+[![Forks](https://img.shields.io/github/forks/starkindustriestony575-alt/movie-recommendation-system?style=flat&color=green)](https://github.com/starkindustriestony575-alt/movie-recommendation-system/fork)
+[![License](https://img.shields.io/github/license/starkindustriestony575-alt/movie-recommendation-system?style=flat&color=blue)](https://github.com/starkindustriestony575-alt/movie-recommendation-system/blob/main/LICENSE)
+[![Last Commit](https://img.shields.io/github/last-commit/starkindustriestony575-alt/movie-recommendation-system?style=flat&color=orange)](https://github.com/starkindustriestony575-alt/movie-recommendation-system/commits/main)
 
 ---
 
@@ -25,7 +21,7 @@ A modern, web-based movie recommendation application built with **Python** and *
 ### 🎯 Key Features
 
 | Feature | Description |
-|---------|-------------|
+| --------- | ------------- |
 | 🧠 **Content-Based Filtering** | Recommends movies similar to your favorites using genre analysis with TF-IDF & Cosine Similarity |
 | 👥 **Collaborative Filtering** | Leverages community preferences using SVD/NMF/KNN matrix factorization |
 | 🔄 **Hybrid Model** | Combines both approaches for superior personalization (default 65% collaborative / 35% content) |
@@ -39,7 +35,7 @@ A modern, web-based movie recommendation application built with **Python** and *
 > **Try it now!** No installation required.
 
 | Platform | Link |
-|----------|------|
+| -------- | ---- |
 | 🌐 **Streamlit Cloud** | [movie-recommendation-system.streamlit.app](https://movie-recommendation-system-vsdarx6jwnpi8ft5wyqjzv.streamlit.app/) |
 | 💻 **GitHub Repository** | [github.com/starkindustriestony575-alt/movie-recommendation-system](https://github.com/starkindustriestony575-alt/movie-recommendation-system) |
 
@@ -48,6 +44,7 @@ A modern, web-based movie recommendation application built with **Python** and *
 ## 🛠️ Tech Stack
 
 ### Core Technologies
+
 - **Python 3.14+** — Programming Language
 - **Streamlit** — Web UI Framework
 - **Pandas** — Data manipulation & analysis
@@ -56,6 +53,7 @@ A modern, web-based movie recommendation application built with **Python** and *
 - **SciPy** — SVD/NMF matrix factorization
 
 ### Data Source
+
 - **MovieLens ml-latest-small** by GroupLens Research
   - 📽️ 9,742 movies
   - 👤 100,004 ratings from 610 users
@@ -64,7 +62,7 @@ A modern, web-based movie recommendation application built with **Python** and *
 
 ## 📁 Project Structure
 
-```
+```text
 Movie recommendation-system/
 ├── 📂 app.py                  # Streamlit web application (UI layer)
 ├── 📂 main.py                 # Core recommendation algorithms (business logic)
@@ -90,14 +88,15 @@ Movie recommendation-system/
 > *"Show me more movies like what I enjoyed"*
 
 | Component | Details |
-|-----------|---------|
+| ----------- | --------- |
 | **Vectorization** | TF-IDF (Term Frequency-Inverse Document Frequency) |
 | **Similarity Metrics** | Cosine Similarity, Euclidean Distance, Pearson Correlation |
 | **Input** | Movie title (e.g., "The Dark Knight (2008)") |
 | **Output** | Top-N similar movies ranked by similarity score |
 
 **Algorithm Flow:**
-```
+
+```text
 Movie Genres → TF-IDF Vectorization → Similarity Calculation → Ranked Recommendations
 ```
 
@@ -106,14 +105,15 @@ Movie Genres → TF-IDF Vectorization → Similarity Calculation → Ranked Reco
 > *"What did users like me also enjoy?"*
 
 | Component | Details |
-|-----------|---------|
+| ----------- | --------- |
 | **Matrix** | User-Item Ratings Matrix |
 | **Algorithms** | SVD (50 latent factors), NMF, KNN |
 | **Input** | User ID (1-610) |
 | **Output** | Predicted ratings for unrated movies |
 
 **Algorithm Flow:**
-```
+
+```text
 User Ratings → User-Item Matrix → SVD/NMF/KNN → Rating Prediction → Ranked Recommendations
 ```
 
@@ -122,7 +122,7 @@ User Ratings → User-Item Matrix → SVD/NMF/KNN → Rating Prediction → Rank
 > *"The best of both worlds"*
 
 | Component | Details |
-|-----------|---------|
+| ----------- | --------- |
 | **Approach** | Weighted combination of Content + Collaborative |
 | **Default Balance** | α = 0.65 (65% collaborative, 35% content-based) |
 | **Customizable** | Adjustable α slider (0.0 - 1.0) |
@@ -130,7 +130,8 @@ User Ratings → User-Item Matrix → SVD/NMF/KNN → Rating Prediction → Rank
 | **Output** | Highly personalized recommendations |
 
 **Algorithm Flow:**
-```
+
+```text
 Content Scores ─┬─→ Weighted Combine → Final Ranking → Personalized Recommendations
 Collaborative ┘
 ```
@@ -160,7 +161,7 @@ streamlit run app.py
 
 ### Step 4: Open in Browser
 
-Navigate to: **http://localhost:8501**
+Navigate to: **<http://localhost:8501>**
 
 ---
 
@@ -212,14 +213,14 @@ Navigate to: **http://localhost:8501**
 ### Content-Based Filtering
 
 | Parameter | Type | Default | Range | Description |
-|-----------|------|---------|-------|-------------|
+| ----------- | ------ | --------- | ------- | ------------- |
 | `top_n` | int | 10 | 1-50 | Number of recommendations |
 | `metric` | str | 'cosine' | cosine/euclidean/pearson | Similarity metric |
 
 ### Collaborative Filtering
 
 | Parameter | Type | Default | Range | Description |
-|-----------|------|---------|-------|-------------|
+| ----------- | ------ | --------- | ------- | ------------- |
 | `user_id` | int | 1 | 1-610 | Target user ID |
 | `top_n` | int | 10 | 1-50 | Number of recommendations |
 | `method` | str | 'svd' | svd/nmf/knn | Matrix factorization method |
@@ -228,7 +229,7 @@ Navigate to: **http://localhost:8501**
 ### Hybrid Model
 
 | Parameter | Type | Default | Range | Description |
-|-----------|------|---------|-------|-------------|
+| ----------- | ------ | --------- | ------- | ------------- |
 | `user_id` | int | 1 | 1-610 | Target user ID |
 | `top_n` | int | 10 | 1-50 | Number of recommendations |
 | `alpha` | float | 0.65 | 0.0-1.0 | Collaborative weight (1-α = content) |
@@ -251,7 +252,7 @@ Contributions are welcome! Help us make this project even better.
 ### Contribution Ideas
 
 | Area | Ideas |
-|------|-------|
+| ------ | ------- |
 | 🔬 **Algorithms** | Add neural collaborative filtering, autoencoders, graph-based recommendations |
 | 📊 **Metrics** | Implement RMSE, MAE, Precision@K, Recall@K evaluation |
 | 🎨 **UI/UX** | Add movie posters, trailers, ratings visualization |
@@ -270,22 +271,13 @@ See the [LICENSE](LICENSE) file for details.
 
 ## 👤 Author
 
-<div align="center">
-  <h3>Sarvagya Gupta</h3>
-  <h4>(Little Stark)</h4>
-  
-  <a href="https://github.com/starkindustriestony575-alt">
-    <img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub">
-  </a>
-  <a href="mailto:starkgupta575@gmail.com">
-    <img src="https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Email">
-  </a>
-</div>
+**Sarvagya Gupta**  
+*(Little Stark)*
+
+[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/starkindustriestony575-alt) [![Email](https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:starkgupta575@gmail.com)
 
 ---
 
-<div align="center">
-  ⭐ If you found this project useful, please give it a star!
-  
-  Happy Movie Watching! 🍿
-</div>
+⭐ If you found this project useful, please give it a star!
+
+Happy Movie Watching! 🍿
